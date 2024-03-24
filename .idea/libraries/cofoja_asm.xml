@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cofoja.asm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cofoja.asm.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

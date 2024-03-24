@@ -9,7 +9,10 @@ import com.google.java.contract.Requires;
 
 
 @ContractImport("java.util.ArrayList")
-//Add an invariant here.
+@Invariant({
+		"numbers != null", // the list itself must not be null
+		"!numbers.contains(null)" // the list must not contain any null elements
+})
 public class NaturalList {
 	private ArrayList<Natural> numbers;
 	

@@ -2,7 +2,7 @@ import com.google.java.contract.Ensures;
 import com.google.java.contract.Invariant;
 import com.google.java.contract.Requires;
 
-//Add an invariant here.
+@Invariant("data >= 0 && data <= Integer.MAX_VALUE")
 public class Natural implements Comparable<Natural> {
 	private int data;
 
