@@ -29,6 +29,7 @@ public class Natural implements Comparable<Natural> {
 	}
 
 	@Requires("d >= 0") // Constructor should only accept non-negative integers.
+	@Ensures("data == d") // Ensure that the data is initialized to the value of d.
 	public Natural(int d) {
 		data = d;
 	}
@@ -45,8 +46,8 @@ public class Natural implements Comparable<Natural> {
 		data--;
 	}
 
-	@Requires("n != null && data + n.data <= Integer.MAX_VALUE") // Check for overflow.
-	@Ensures("data == old(data) + n.data")
+	@Requires("n != null && data + n.data <= Integer.MAX_VALUE") // Prevents overflow.
+	@Ensures("data == old(data) + n.data") // Ensures data is correctly updated.
 	public void add(Natural n) {
 		data += n.data;
 	}

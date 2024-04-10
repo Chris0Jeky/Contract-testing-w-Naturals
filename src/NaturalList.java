@@ -40,25 +40,27 @@ public class NaturalList {
 	}
 
 	@Requires("n != null") // Can't add a null Natural object.
-	@Ensures("numbers.contains(n) && numbers.get(numbers.size() - 1).equals(n)")
+	@Ensures({"numbers.contains(n)", "numbers.size() == old(numbers.size()) + 1"}) // Ensures n is added and list size increases.
 	public void push(Natural n) {
 		numbers.add(n);
 	}
 
 	@Requires("i >= 0 && i < numbers.size()") // Index must be within the list size.
-	@Ensures("result.equals(numbers.get(i))")
+	@Ensures({"result.equals(numbers.get(i))", "numbers.equals(old(numbers))"}) // Result matches and list remains unchanged.
 	public Natural get(int i) {
 		return numbers.get(i);
 	}
 
 	@Requires({"i >= 0 && i < numbers.size()", "n != null"}) // Index within bounds and Natural is not null.
-	@Ensures("numbers.get(i).equals(n)")
+	@Ensures("numbers.get(i).equals(n) && numbers.equals(old(numbers).set(i, n))") // Element at i is updated, rest remains the same.
 	public void set(int i, Natural n) {
 		numbers.set(i, n);
 	}
 
-	// No preconditions required for sort; can sort an empty list or any list of Natural.
-	@Ensures("java.util.Collections.min(numbers).equals(numbers.get(0)) && java.util.Collections.max(numbers).equals(numbers.get(numbers.size() - 1))")
+	// Ensures the entire list is sorted in ascending order.
+	@Ensures("org.apache.commons.collections4.CollectionUtils.isEqualCollection(numbers, old(numbers)) && " +
+			"java.util.Collections.min(numbers).equals(numbers.get(0)) && " +
+			"java.util.Collections.max(numbers).equals(numbers.get(numbers.size() - 1))")
 	public void sort() {
 		Collections.sort(numbers);
 	}
