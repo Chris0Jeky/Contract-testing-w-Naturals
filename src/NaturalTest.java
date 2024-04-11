@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 class NaturalTest {
 
 	@Test
@@ -46,6 +48,7 @@ class NaturalTest {
 		Natural natural1 = new Natural(1);
 		Natural natural2 = new Natural(2);
 		natural1.add(natural2); // Should be a valid operation
+		assertEquals(3, natural1.data); // Assert the result is as expected.
 	}
 
 	@Test

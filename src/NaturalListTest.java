@@ -1,12 +1,18 @@
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class NaturalListTest {
 
 	@Test
 	void testPushWithValidNatural() {
 		NaturalList list = new NaturalList();
 		Natural natural = new Natural(5);
+		int initialSize = list.numbers.size();
 		list.push(natural); // Should pass without throwing an error
+		assertEquals(initialSize + 1, list.numbers.size()); // Assert the list size has increased.
+		assertTrue(list.numbers.contains(natural)); // Assert the list contains the added element.
 	}
 
 	@Test
@@ -14,8 +20,6 @@ class NaturalListTest {
 		NaturalList list = new NaturalList();
 		list.push(null); // Should throw PreconditionError
 	}
-
-	// ...
 
 	@Test
 	void testSortEmptyList() {
